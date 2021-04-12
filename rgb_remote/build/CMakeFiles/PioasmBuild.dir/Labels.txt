@@ -1,0 +1,13 @@
+# Target labels
+ PioasmBuild
+# Source files and their labels
+/home/aleksandar/pico/rgb_remote/build/CMakeFiles/PioasmBuild
+/home/aleksandar/pico/rgb_remote/build/CMakeFiles/PioasmBuild.rule
+/home/aleksandar/pico/rgb_remote/build/CMakeFiles/PioasmBuild-complete.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-install.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-download.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-update.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure.rule
+/home/aleksandar/pico/rgb_remote/build/pioasm/src/PioasmBuild-stamp/PioasmBuild-build.rule

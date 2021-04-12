@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../test1"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "rgb_frontend"
+	}
+}
