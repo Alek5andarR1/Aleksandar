@@ -233,6 +233,8 @@ pico/stdio.h
 /home/aleksandar/pico/rgb_remote/rgb_remote.c
 stdio.h
 -
+math.h
+-
 stdlib.h
 -
 pico/stdlib.h

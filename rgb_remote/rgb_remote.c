@@ -1,4 +1,14 @@
+/* This is raspberry pico C/C++ code for conntroling WS2801 neo pixle. 
+Via html frontend build on flask server. WS2801 controled via 
+SPI with hardware pio. Communication with server via Uart. 
+It is not stable. */
+
+
+
+
+
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include "hardware/spi.h"
@@ -7,10 +17,10 @@
 #include "rgb_remote.pio.h"
 
 #define UART_ID uart0
-#define BAUD_RATE 115200
+#define BAUD_RATE 9600
 
-//#define UART_TX_PIN 0
-//#define UART_RX_PIN 1
+#define UART_TX_PIN 0
+#define UART_RX_PIN 1
 
 #define PIN_CLK 2
 #define PIN_DIN 3
@@ -20,9 +30,6 @@
 
 
 
-
-int val;
-long ret; 
 
 
 void put_start_frame(PIO pio, uint sm) {
@@ -35,26 +42,15 @@ void put_end_frame(PIO pio, uint sm) {
 
 void put_rgb888(PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b) {
     pio_sm_put_blocking(pio, sm,
-                        0x7 << 24 |                   // magic
                         (uint32_t) b << 16 |
                         (uint32_t) g << 8 |
                         (uint32_t) r << 0
     );
-
 }
 
 
 
-/*void on_uart_rx() {
-    while (uart_is_readable(UART_ID)) {
-        uint8_t  ch = uart_getc(UART_ID);
-        char* p =&ch;
-        ret = strtol(p, NULL, 10);
-        printf("\n");
-        printf("%d",ret);
-        
-        }
-     } */
+
 int main() {
     
     
@@ -64,30 +60,144 @@ int main() {
     uint sm = 0;
     uint offset = pio_add_program(pio, &rgb_remote_mini_program);
     rgb_remote_mini_program_init(pio, sm, offset, SERIAL_FREQ, PIN_CLK, PIN_DIN);
-    
-   // sleep_ms(5000);
- 
-    
-   // printf("hello serial\n");
+    uart_init(UART_ID, BAUD_RATE);
+    gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
 
-    // Set up our UART with the required speed.
-   // uart_init(UART_ID, BAUD_RATE);
+
+    
+    int num     = 0;  
+    int counter = 0;
+    int i       = 0;
+    int j       = 0;
+
+    
+    static char rx_buffer[9] = {0};
+
+    
+    long led1[9] = {0};
+    long led2[9] = {0};
+    long led3[9] = {0};
+    long led4[9] = {0};
+    long led5[9] = {0};
+    long led6[9] = {0};
+    
+    while (true) {
+     
+       while (uart_is_readable(uart0))
+       { 
+           
+          for (counter = 0; counter < 54; counter++) {
+         
+            uint8_t  ch = uart_getc(UART_ID);
+            char *p; 
+            p = &ch;
+            num = strtol(p, NULL, 10);
+            i = counter % 9;
+            j = counter / 9;
+           
+            rx_buffer[i] = num;
+           
+           if (j < 1 ) {
+               led1[i] = rx_buffer[i];
+               if(i == 0) {printf(" led1: ");}
+               printf("%d", led1[i]);
+               if(i == 8) {printf("\n");}
+               }
+               
+
+             
+           if (j >= 1 && j < 2 ) {
+                led2[i] = rx_buffer[i]; 
+                if(i == 0) {printf(" led2: ");}
+                printf("%d", led2[i]);
+                if(i == 8) {printf("\n");}
+                
+               }
+               
+           if (j >= 2 && j < 3) {
+                led3[i] = rx_buffer[i]; 
+                if(i == 0) {printf(" led3: ");}
+                printf("%d", led3[i]);
+                if(i == 8) {printf("\n");}
+               }
+               
+              
+           if (j >= 3 && j < 4) {
+                led4[i] = rx_buffer[i]; 
+                if(i == 0) {printf(" led4: ");}
+                printf("%d", led4[i]);
+                if(i == 8) {printf("\n");}
+                
+                }
+           
+           if (j >= 4 && j < 5) {
+                led5[i] = rx_buffer[i]; 
+                if(i == 0) {printf(" led5: ");}
+                printf("%d", led5[i]);
+                if(i == 8) {printf("\n");}
+                
+                } 
+                    
+           if (j >= 5) {
+                led6[i] = rx_buffer[i]; 
+                if(i == 0) {printf(" led6: ");}
+                printf("%d", led6[i]);
+                if(i == 8) {printf("\n \n");}
+                
+                }      
+
+            
+        }
+     }       
+                
    
-    // Set the TX and RX pins by using the function select on the GPIO
-    // Set datasheet for more information on function select
-   //  gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-   //   gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
-
-
- while(true) {
+           put_rgb888(pio, sm, 
+                led1[0]*100 + led1[1]*10 + led1[2],
+                led1[3]*100 + led1[4]*10 + led1[5],
+                led1[6]*100 + led1[7]*10 + led1[8]
+                );
+               
+            put_rgb888(pio, sm, 
+                led2[0]*100 + led2[1]*10 + led2[2],
+                led2[3]*100 + led2[4]*10 + led2[5],
+                led2[6]*100 + led2[7]*10 + led2[8]
+                );
+                
+            
+            put_rgb888(pio, sm, 
+                led3[0]*100 + led3[1]*10 + led3[2],
+                led3[3]*100 + led3[4]*10 + led3[5],
+                led3[6]*100 + led3[7]*10 + led3[8]
+                );
+            
+            put_rgb888(pio, sm, 
+                led4[0]*100 + led4[1]*10 + led4[2],
+                led4[3]*100 + led4[4]*10 + led4[5],
+                led4[6]*100 + led4[7]*10 + led4[8]
+                );
+            
+            put_rgb888(pio, sm, 
+                led5[0]*100 + led5[1]*10 + led5[2],
+                led5[3]*100 + led5[4]*10 + led5[5],
+                led5[6]*100 + led5[7]*10 + led5[8]
+                );
+               
+            put_rgb888(pio, sm, 
+                led6[0]*100 + led6[1]*10 + led6[2],
+                led6[3]*100 + led6[4]*10 + led6[5],
+                led6[6]*100 + led6[7]*10 + led6[8]
+                );
+           
+                
+           
+                
+            sleep_ms(2);
+          
+           }
+          }
+           
+   
     
-  for(int i = 0; i < N_LEDS; i++) {
-     put_rgb888(pio, sm, 255, 0, 0);
-     }
-
-    //on_uart_rx();
-   }
- }
-
+ 
 
 

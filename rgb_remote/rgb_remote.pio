@@ -1,4 +1,4 @@
-
+;PIO file for rgb_remote works with WS2081 neopixel
 
 .program rgb_remote_mini
 .side_set 1
