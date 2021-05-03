@@ -1,0 +1,31 @@
+{
+    "name": "Rgb led remote",
+    "short_name": "rgb remote",
+    "theme_color": "#301210",
+    "background_color": "#120401",
+    "icons": [
+      {
+          "src": "/static/icons/rgb-64.png",
+          "type": "image/png",
+          "sizes": "64x64"
+        },
+        {
+          "src": "/static/icons/rgb-96.png",
+          "type": "image/png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "/static/icons/rgb-192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+          "src": "/static/icons/rgb-512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+  }

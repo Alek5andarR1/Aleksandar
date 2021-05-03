@@ -5,15 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <style media="screen">
     </style>
     <title>RGB Front End</title>
 </head>
 <body>
     <div class="main">
-    <div class="grid" >
+    <div class="button-grid" >
         <button class="button" id="btn"></button>
         <button class="button" id="btn1"></button>
+        <button class="button" id="btn2"></button>
+        <button class="button" id="btn3"></button>
+        <button class="button" id="btn4"></button>
+        <button class="button" id="btn5"></button>
     </div>
         <input type="text" id ="box" value="rgb(255,255,255)">
         <input type="range" id="red" value="255" min="0" max="255">

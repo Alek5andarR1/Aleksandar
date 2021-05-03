@@ -18,6 +18,15 @@ body {
     font-family: Verdana;
 }
 
+.button-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: auto;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: minmax(50px, auto) repeat(2, 10px);
+}
+
 button {
     height: 40px;
     width: 40px;
