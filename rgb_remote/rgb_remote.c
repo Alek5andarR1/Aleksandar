@@ -1,7 +1,6 @@
 /* This is raspberry pico C/C++ code for conntroling WS2801 neo pixle. 
 Via html frontend build on flask server. WS2801 controled via 
-SPI with hardware pio. Communication with server via Uart. 
-It is not stable. */
+SPI with hardware pio. Communication with server via Uart.  */
 
 
 
@@ -99,51 +98,29 @@ int main() {
            
            if (j < 1 ) {
                led1[i] = rx_buffer[i];
-               if(i == 0) {printf(" led1: ");}
-               printf("%d", led1[i]);
-               if(i == 8) {printf("\n");}
                }
                
 
              
            if (j >= 1 && j < 2 ) {
                 led2[i] = rx_buffer[i]; 
-                if(i == 0) {printf(" led2: ");}
-                printf("%d", led2[i]);
-                if(i == 8) {printf("\n");}
-                
                }
                
            if (j >= 2 && j < 3) {
                 led3[i] = rx_buffer[i]; 
-                if(i == 0) {printf(" led3: ");}
-                printf("%d", led3[i]);
-                if(i == 8) {printf("\n");}
                }
                
               
            if (j >= 3 && j < 4) {
                 led4[i] = rx_buffer[i]; 
-                if(i == 0) {printf(" led4: ");}
-                printf("%d", led4[i]);
-                if(i == 8) {printf("\n");}
-                
                 }
            
            if (j >= 4 && j < 5) {
                 led5[i] = rx_buffer[i]; 
-                if(i == 0) {printf(" led5: ");}
-                printf("%d", led5[i]);
-                if(i == 8) {printf("\n");}
-                
                 } 
                     
            if (j >= 5) {
                 led6[i] = rx_buffer[i]; 
-                if(i == 0) {printf(" led6: ");}
-                printf("%d", led6[i]);
-                if(i == 8) {printf("\n \n");}
-                
                 }      
 
             
